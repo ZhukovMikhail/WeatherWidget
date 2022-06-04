@@ -1,7 +1,6 @@
-import { Container } from './AddCity.styled';
+import { Container, BgContainer } from './AddCity.styled';
 import { Button } from '@mui/material';
 import { MdNoteAdd } from 'react-icons/md';
-// import { getDefaultCity } from 'api';
 import { useState } from 'react';
 import allcities from '../../db/worldcities.json';
 
@@ -32,47 +31,48 @@ export const AddCity = ({ cityArrData }) => {
     const lat = filteredCountryArray.find(c => c.city === value).lat;
     const id = filteredCountryArray.find(c => c.city === value).id;
     const country = filteredCountryArray.find(c => c.city === value).country;
-    console.log('coord', { lon, lat });
 
     cityArrData({ value, lon, lat, id, country });
     toggleOpenAdd();
   };
 
   return (
-    <Container>
-      <span>Selected cities</span>
-      {!isOpen && (
-        <Button
-          variant="contained"
-          endIcon={<MdNoteAdd />}
-          onClick={toggleOpenAdd}
-        >
-          Add City to Your List
-        </Button>
-      )}
-      {isOpen && (
-        <div>
-          <select name="" id="" onChange={hendleCountryClick}>
-            <option key="none">{'select country'}</option>
-            {allCountries.map(country => (
-              <option key={country}>{country}</option>
-            ))}
-          </select>
-          {filteredCountry && (
-            <select name="" id="" onChange={hendleCityClick}>
-              <option key="none">{'select city'}</option>
-              {filteredCountryArray.map(c => (
-                <option key={c.id} id={c.city}>
-                  {c.city}
-                </option>
+    <BgContainer>
+      <Container>
+        <span>Selected cities</span>
+        {!isOpen && (
+          <Button
+            variant="contained"
+            endIcon={<MdNoteAdd />}
+            onClick={toggleOpenAdd}
+          >
+            Add City to Your List
+          </Button>
+        )}
+        {isOpen && (
+          <div>
+            <select name="" id="" onChange={hendleCountryClick}>
+              <option key="none">{'select country'}</option>
+              {allCountries.map(country => (
+                <option key={country}>{country}</option>
               ))}
             </select>
-          )}
-          <Button variant="outlined" onClick={toggleOpenAdd}>
-            Cancel
-          </Button>
-        </div>
-      )}
-    </Container>
+            {filteredCountry && (
+              <select name="" id="" onChange={hendleCityClick}>
+                <option key="none">{'select city'}</option>
+                {filteredCountryArray.map(c => (
+                  <option key={c.id} id={c.city}>
+                    {c.city}
+                  </option>
+                ))}
+              </select>
+            )}
+            <Button variant="outlined" onClick={toggleOpenAdd}>
+              Cancel
+            </Button>
+          </div>
+        )}
+      </Container>
+    </BgContainer>
   );
 };

@@ -7,6 +7,8 @@ import { getDefaultCity } from 'api.js';
 export const CitiesItem = ({
   city: { value: cityName, lon, lat, id, country },
   onDelete,
+  onSelect,
+  selectedCityId,
 }) => {
   const [data, setData] = useState(null); //set weather response
   useEffect(() => {
@@ -16,16 +18,20 @@ export const CitiesItem = ({
       })
       .catch(e => console.log(e));
   }, [lon, lat]);
-  //   console.log('lon', city.data.lon);
-  //   const handleItemClick = e => {};
+
   const handleDeleteItem = e => {
-    console.log(e.target.nodeName === 'DIV');
-    const { nodeName } = e.target;
-    onDelete({ id, nodeName });
+    onDelete({ id });
+  };
+  const handleSelect = e => {
+    onSelect({ id });
   };
 
   return (
-    <ListItem onClick={handleDeleteItem} id={id}>
+    <ListItem
+      onClick={handleSelect}
+      id={id}
+      className={selectedCityId === id && 'active'}
+    >
       <span>{cityName}</span>
       <span>{country}</span>
       {data && (
@@ -44,10 +50,11 @@ export const CitiesItem = ({
       )}
 
       <Button
-        variant="contained"
+        variant={selectedCityId === id ? 'contained' : 'outlined'}
         endIcon={<MdDeleteForever />}
         onClick={handleDeleteItem}
         id={id}
+        disabled={selectedCityId !== id}
       >
         Delete City
       </Button>
