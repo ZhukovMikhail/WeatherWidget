@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 export const ListItem = styled.div`
   display: flex;
-  height: 40px;
+  height: 4.2vw;
   padding: 5px 30px 5px 30px;
   margin-top: 5px;
   background-color: hsla(0, 0%, 100%, 0.75);
@@ -26,7 +26,10 @@ export const ListItem = styled.div`
   }
 `;
 export const StyledButton = styled(Button)`
-  width: 15vw;
+  min-width: 10vw;
   height: 2vw;
   font-size: 1.5vw;
+  @media screen and (max-width: 767px) {
+    height: 3.5vw;
+  }
 `;

@@ -4,7 +4,7 @@ export const Container = styled.div`
   position: relative;
   display: flex;
   width: 97vw;
-  height: 50px;
+  height: 4.2vw;
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 10px;
   align-items: center;
@@ -16,18 +16,22 @@ export const Container = styled.div`
   @media screen and (max-width: 767px) {
     height: 30px;
     justify-content: flex-start;
+    h2 {
+      margin: 0 auto;
+    }
   }
 `;
 export const BgContainer = styled.div`
   display: flex;
-  height: 70px;
+  height: 5.5vw;
   background-color: rgba(211, 211, 211, 0.5);
   border-radius: 10px;
   justify-content: space-around;
   align-items: center;
   padding: 5px;
   @media screen and (max-width: 767px) {
-    height: 40px;
+    height: 7vw;
+    /* margin-top: 20vh; */
   }
 `;
 
@@ -48,6 +52,7 @@ export const Selection = styled.div`
       height: 3.8vw;
       font-size: 2.5vw;
       width: 25vw;
+      border-radius: 2.5px;
     }
   }
 `;
@@ -58,7 +63,10 @@ export const ButtonAdd = styled(Button)`
   top: 50%;
   right: 5%;
   transform: translateY(-50%);
-  width: 15vw;
+  min-width: 10vw;
   height: 2vw;
   font-size: 1.5vw;
+  @media screen and (max-width: 767px) {
+    height: 3.5vw;
+  }
 `;

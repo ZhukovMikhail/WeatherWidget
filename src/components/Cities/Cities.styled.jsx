@@ -6,4 +6,8 @@ export const Container = styled.div`
 
   border-radius: 10px;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    min-height: 60vh;
+    align-items: center;
+  }
 `;
