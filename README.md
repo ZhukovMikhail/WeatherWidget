@@ -3,8 +3,9 @@ Weather-widget
 
 Technical information:
 Weather-widget created with React.js framework in addition with @Mui, styled component, react-icons, react-tostity and rooks(react hooks) libraries.
+Aplication uses built-in file which contains 42905 cities all over the world.
 During development aslo were used basic react hooks such as useState, useEffect, useRef and additional hooks useGeolocation, which helps to achive user location and  useLocalStorage to save information about selected cities in user list.
-Also in aplication were used pagination and button components from @mui library. 
+Also in aplication were used pagination and button components from @mui library.
 
 
 Description:
