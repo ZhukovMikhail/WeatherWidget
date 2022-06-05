@@ -19,11 +19,6 @@ export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
     cityData.sys.sunrise * 1000
   ).toLocaleTimeString();
 
-  // const timeLocal = useRef(new Date().toLocaleTimeString());
-  // const timeSelected = useRef(
-  //   new Date(Date.now() - cityData.timezone * 1000).toLocaleTimeString()
-  // );
-
   const timer = useRef(
     setInterval(() => {
       const loalTime =
@@ -33,7 +28,6 @@ export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
               Date.now() - cityData.timezone * 1000
             ).toLocaleTimeString();
       setClock(loalTime);
-      // console.log('timer', timer);
     }, 1000)
   );
 

@@ -13,6 +13,9 @@ export const Container = styled.div`
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
   -webkit-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
+  @media screen and (max-width: 767px) {
+    height: 30px;
+  }
 `;
 export const BgContainer = styled.div`
   display: flex;
@@ -21,9 +24,10 @@ export const BgContainer = styled.div`
   border-radius: 10px;
   justify-content: space-around;
   align-items: center;
-  /* margin-top: 10px; */
-
   padding: 5px;
+  @media screen and (max-width: 767px) {
+    height: 40px;
+  }
 `;
 
 export const Selection = styled.div`

@@ -9,7 +9,7 @@ export const ListItem = styled.div`
   border-radius: 10px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 1vw;
   transition: 300ms;
   div {
     width: 50vw;
@@ -21,6 +21,9 @@ export const ListItem = styled.div`
   box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
   -webkit-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
+  @media screen and (max-width: 767px) {
+    height: 30px;
+  }
 `;
 export const StyledButton = styled(Button)`
   width: 15vw;
