@@ -44,7 +44,7 @@ function App() {
       return state.filter(s => s.id !== deleteId);
     });
     setDeleteId(null);
-    (cities.length - 1) % perPage === 0 && setPage(p => p - 1);
+    (cities.length - 1) % perPage === 0 && page !== 1 && setPage(p => p - 1);
   }
 
   const selectedCityObject = cities.find(c => c.id === selectedCityId);
@@ -66,7 +66,9 @@ function App() {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          backgroundColor: '#d3d3d37f',
+          backgroundColor: '#ffffff7e',
+          borderRadius: '10px',
+          marginTop: '10px',
         }}
         count={totalPage}
         shape="rounded"

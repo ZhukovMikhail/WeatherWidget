@@ -1,5 +1,6 @@
-import { Container, BgContainer } from './AddCity.styled';
-import { Button } from '@mui/material';
+import { Container, BgContainer, Selection, ButtonAdd } from './AddCity.styled';
+// import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import { MdNoteAdd } from 'react-icons/md';
 import { useState } from 'react';
 import allcities from '../../db/worldcities.json';
@@ -19,6 +20,7 @@ export const AddCity = ({ cityArrData }) => {
 
   const toggleOpenAdd = e => {
     setIsOpen(!isOpen);
+    setFilteredCountry(null);
   };
 
   const hendleCountryClick = e => {
@@ -39,18 +41,25 @@ export const AddCity = ({ cityArrData }) => {
   return (
     <BgContainer>
       <Container>
-        <span>Selected cities</span>
         {!isOpen && (
-          <Button
-            variant="contained"
-            endIcon={<MdNoteAdd />}
-            onClick={toggleOpenAdd}
-          >
-            Add City to Your List
-          </Button>
+          <>
+            <h2>Selected cities</h2>
+
+            <ButtonAdd
+              variant="contained"
+              endIcon={<MdNoteAdd size={'1.5vw'} />}
+              onClick={toggleOpenAdd}
+              style={{
+                marginLeft: '30vw',
+              }}
+            >
+              Add
+            </ButtonAdd>
+          </>
         )}
+
         {isOpen && (
-          <div>
+          <Selection>
             <select name="" id="" onChange={hendleCountryClick}>
               <option key="none">{'select country'}</option>
               {allCountries.map(country => (
@@ -67,10 +76,16 @@ export const AddCity = ({ cityArrData }) => {
                 ))}
               </select>
             )}
-            <Button variant="outlined" onClick={toggleOpenAdd}>
+            <ButtonAdd
+              variant="outlined"
+              onClick={toggleOpenAdd}
+              style={{
+                marginLeft: '30vw',
+              }}
+            >
               Cancel
-            </Button>
-          </div>
+            </ButtonAdd>
+          </Selection>
         )}
       </Container>
     </BgContainer>

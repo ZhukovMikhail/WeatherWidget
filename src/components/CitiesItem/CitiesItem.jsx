@@ -1,5 +1,5 @@
-import { ListItem } from './CitiesItem.styled';
-import { Button } from '@mui/material';
+import { ListItem, StyledButton } from './CitiesItem.styled';
+// import { Button } from '@mui/material';
 import { MdDeleteForever } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import { getDefaultCity } from 'api.js';
@@ -16,7 +16,9 @@ export const CitiesItem = ({
       .then(r => {
         setData(r);
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        console.log(e);
+      });
   }, [lon, lat]);
 
   const handleDeleteItem = e => {
@@ -32,8 +34,10 @@ export const CitiesItem = ({
       id={id}
       className={selectedCityId === id && 'active'}
     >
-      <span>{cityName}</span>
-      <span>{country}</span>
+      <div>
+        <span>{cityName}</span>
+        <span>{country}</span>
+      </div>
       {data && (
         <>
           <div>
@@ -48,16 +52,15 @@ export const CitiesItem = ({
           </div>
         </>
       )}
-
-      <Button
+      <StyledButton
         variant={selectedCityId === id ? 'contained' : 'outlined'}
-        endIcon={<MdDeleteForever />}
+        endIcon={<MdDeleteForever size={'1.5vw'} />}
         onClick={handleDeleteItem}
         id={id}
         disabled={selectedCityId !== id}
       >
-        Delete City
-      </Button>
+        Delete
+      </StyledButton>
     </ListItem>
   );
 };

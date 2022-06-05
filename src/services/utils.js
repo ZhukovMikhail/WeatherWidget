@@ -5,3 +5,8 @@ export const notify = () =>
     position: toast.POSITION.TOP_CENTER,
     autoClose: 1000,
   });
+export const notifyError = message =>
+  toast.error(`${message}`, {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 5000,
+  });

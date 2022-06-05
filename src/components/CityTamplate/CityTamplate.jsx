@@ -1,24 +1,49 @@
-import { CityBox, MainBox, StyledSpan, TextBlock } from './CityBox.styled';
-import { useState, useEffect } from 'react';
+import {
+  CityBox,
+  MainBox,
+  StyledSpan,
+  TextBlock,
+  CloseIcon,
+  IMG,
+} from './CityBox.styled';
+import { useState, useEffect, useRef } from 'react';
 import { FiSunset, FiSunrise } from 'react-icons/fi';
 
-export const CityBoxTamplate = ({ cityData, location }) => {
+export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
   const [clock, setClock] = useState();
 
-  const sunsetDate = new Date(cityData.sys.sunset * 1000).toLocaleTimeString();
+  const sunsetDate = new Date(
+    Date.now() - cityData.sys.sunset * 1000
+  ).toLocaleTimeString();
   const sunriseDate = new Date(
     cityData.sys.sunrise * 1000
   ).toLocaleTimeString();
 
-  useEffect(() => {
-    setInterval(() => {
-      setClock(new Date().toLocaleString());
-    }, 1000);
+  // const timeLocal = useRef(new Date().toLocaleTimeString());
+  // const timeSelected = useRef(
+  //   new Date(Date.now() - cityData.timezone * 1000).toLocaleTimeString()
+  // );
 
-    // return () => {
-    //   second;
-    // };
-  }, [cityData.timeZone]);
+  const timer = useRef(
+    setInterval(() => {
+      const loalTime =
+        location === 'Current Location'
+          ? new Date().toLocaleTimeString()
+          : new Date(
+              Date.now() - cityData.timezone * 1000
+            ).toLocaleTimeString();
+      setClock(loalTime);
+      // console.log('timer', timer);
+    }, 1000)
+  );
+
+  useEffect(() => {
+    clearInterval(timer.current);
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      clearInterval(timer.current);
+    };
+  }, [cityData]);
 
   return (
     <CityBox>
@@ -31,7 +56,7 @@ export const CityBoxTamplate = ({ cityData, location }) => {
 
             <h3>{clock}</h3>
             <div>
-              <img src={cityData.weather[0].icon} alt="Weather Icon" />
+              <IMG src={cityData.weather[0].icon} alt="Weather Icon" />
             </div>
           </MainBox>
           <TextBlock>
@@ -70,6 +95,9 @@ export const CityBoxTamplate = ({ cityData, location }) => {
             <span>{'Sunset: '}</span> <FiSunset />
             <StyledSpan>{sunsetDate}</StyledSpan>
           </TextBlock>
+          {location === 'Selected city info' && (
+            <CloseIcon onClick={handleCloseIcon} />
+          )}
         </>
       )}
     </CityBox>
