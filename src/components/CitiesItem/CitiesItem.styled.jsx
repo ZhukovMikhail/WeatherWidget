@@ -12,7 +12,7 @@ export const ListItem = styled.div`
   margin-top: 10px;
   transition: 300ms;
   div {
-    width: 300px;
+    width: 50vw;
   }
   &.active {
     background-color: #80b5ff;

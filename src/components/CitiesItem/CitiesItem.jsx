@@ -36,7 +36,7 @@ export const CitiesItem = ({
     >
       <div>
         <span>{cityName}</span>
-        <span>{country}</span>
+        <span style={{ marginLeft: '2vw' }}>{country}</span>
       </div>
       {data && (
         <>
