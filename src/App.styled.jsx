@@ -23,5 +23,6 @@ export const Container = styled.div`
   @media screen and (max-width: 767px) {
     height: 100vh;
     font-size: 2vw;
+    background-size: cover;
   }
 `;
