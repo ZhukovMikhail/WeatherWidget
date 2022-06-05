@@ -25,6 +25,7 @@ export const CityBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-size: 2.5vw;
   }
 
   margin: 1vw;

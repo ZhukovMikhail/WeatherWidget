@@ -15,6 +15,7 @@ export const Container = styled.div`
   -moz-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.7);
   @media screen and (max-width: 767px) {
     height: 30px;
+    justify-content: flex-start;
   }
 `;
 export const BgContainer = styled.div`
@@ -35,6 +36,7 @@ export const Selection = styled.div`
   display: flex;
   /* justify-content: center; */
   align-items: center;
+
   select {
     font-size: 1.5vw;
     margin-left: 4vw;
@@ -42,6 +44,11 @@ export const Selection = styled.div`
     width: 15vw;
     border: 1px solid #0c1475;
     border-radius: 5px;
+    @media screen and (max-width: 767px) {
+      height: 3.8vw;
+      font-size: 2.5vw;
+      width: 25vw;
+    }
   }
 `;
 
