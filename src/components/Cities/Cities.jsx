@@ -30,6 +30,8 @@ export const Cities = ({ selectedCity }) => {
     if (selectedCity === undefined) {
       return;
     }
+    // for reload timer in component
+    setSelectedCityData(null);
     getDefaultCity(selectedCity.lon, selectedCity.lat)
       .then(r => {
         setSelectedCityData(r);
