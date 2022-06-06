@@ -12,12 +12,25 @@ import { FiSunset, FiSunrise } from 'react-icons/fi';
 export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
   const [clock, setClock] = useState();
 
-  const sunsetDate = new Date(
-    Date.now() - cityData.sys.sunset * 1000
-  ).toLocaleTimeString();
-  const sunriseDate = new Date(
-    cityData.sys.sunrise * 1000
-  ).toLocaleTimeString();
+  const sunriseDate = useRef(
+    // new Date(
+    // new Date().getUTCMilliseconds() +
+    new Date(
+      cityData.sys.sunrise * 1000 -
+        cityData.timezone * 1000 -
+        new Date().getTimezoneOffset() * 60000
+    ).toLocaleTimeString()
+  );
+
+  const sunsetDate = useRef(
+    // new Date(
+    // new Date().getUTCMilliseconds() -
+    new Date(
+      cityData.sys.sunset * 1000 -
+        cityData.timezone * 1000 -
+        new Date().getTimezoneOffset() * 60000
+    ).toLocaleTimeString()
+  );
 
   const timer = useRef(
     setInterval(() => {
@@ -25,7 +38,9 @@ export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
         location === 'Current Location'
           ? new Date().toLocaleTimeString()
           : new Date(
-              Date.now() - cityData.timezone * 1000
+              Date.now() -
+                cityData.timezone * 1000 -
+                new Date().getTimezoneOffset() * 60000
             ).toLocaleTimeString();
       setClock(loalTime);
     }, 1000)
@@ -83,11 +98,11 @@ export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
           <TextBlock>
             <span>{'Sunrise: '} </span>
             <FiSunrise />
-            <StyledSpan>{sunriseDate}</StyledSpan>
+            <StyledSpan>{sunriseDate.current}</StyledSpan>
           </TextBlock>
           <TextBlock>
             <span>{'Sunset: '}</span> <FiSunset />
-            <StyledSpan>{sunsetDate}</StyledSpan>
+            <StyledSpan>{sunsetDate.current}</StyledSpan>
           </TextBlock>
           {location === 'Selected city info' && (
             <CloseIcon onClick={handleCloseIcon} />
