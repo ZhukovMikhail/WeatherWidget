@@ -11,7 +11,7 @@ export const Container = styled.div`
     min-height: 60vh;
     align-items: center;
     margin-left: 0;
-    padding-left: 11vw;
-    padding-right: 11vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 `;
