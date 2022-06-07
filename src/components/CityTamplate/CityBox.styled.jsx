@@ -50,6 +50,7 @@ export const TextBlock = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const IMG = styled.img`
   display: inline-block;
   width: 6vw;
@@ -58,4 +59,29 @@ export const IMG = styled.img`
     width: 12vw;
     height: 12vw;
   }
+`;
+export const CityBoxLayout = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  /* top: 15%;
+  left: 8%;
+  right: 8%;
+  bottom: 8%; */
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  span {
+    color: white;
+  }
+`;
+export const Title = styled.p`
+  text-align: center;
+  margin: 1vw 1vw;
 `;

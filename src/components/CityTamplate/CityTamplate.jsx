@@ -5,29 +5,35 @@ import {
   TextBlock,
   CloseIcon,
   IMG,
+  CityBoxLayout,
+  Title,
 } from './CityBox.styled';
+import { MdLocationOff } from 'react-icons/md';
 import { useState, useEffect, useRef } from 'react';
 import { FiSunset, FiSunrise } from 'react-icons/fi';
+import { Button } from '@mui/material';
 
-export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
+export const CityBoxTamplate = ({
+  cityData,
+  location,
+  handleCloseIcon,
+  onClick,
+  when,
+}) => {
   const [clock, setClock] = useState();
 
   const sunriseDate = useRef(
-    // new Date(
-    // new Date().getUTCMilliseconds() +
     new Date(
-      cityData.sys.sunrise * 1000 -
-        cityData.timezone * 1000 -
+      cityData?.sys.sunrise * 1000 -
+        cityData?.timezone * 1000 -
         new Date().getTimezoneOffset() * 60000
     ).toLocaleTimeString()
   );
 
   const sunsetDate = useRef(
-    // new Date(
-    // new Date().getUTCMilliseconds() -
     new Date(
-      cityData.sys.sunset * 1000 -
-        cityData.timezone * 1000 -
+      cityData?.sys.sunset * 1000 -
+        cityData?.timezone * 1000 -
         new Date().getTimezoneOffset() * 60000
     ).toLocaleTimeString()
   );
@@ -56,59 +62,90 @@ export const CityBoxTamplate = ({ cityData, location, handleCloseIcon }) => {
 
   return (
     <CityBox>
-      {cityData && (
-        <>
-          <p>{location}</p>
-          <MainBox>
-            <h2>{cityData.name}</h2>
-            <h3>{cityData.sys.country}</h3>
+      <>
+        <p>{location}</p>
 
+        <MainBox>
+          <h2>{cityData?.name}</h2>
+          <h3>{cityData?.sys.country}</h3>
+
+          {when === true ? (
             <h3>{clock}</h3>
-            <div>
-              <IMG src={cityData.weather[0].icon} alt="Weather Icon" />
-            </div>
-          </MainBox>
-          <TextBlock>
-            <span>{'Conditions: '}</span>
-            <StyledSpan>{cityData.weather[0].description}</StyledSpan>
-          </TextBlock>
-          <TextBlock>
-            <span>{'Temperature: '}</span>
-            <StyledSpan>
-              {cityData.main.temp_max}
-              <span>{' ... '}</span>
-              <span>{cityData.main.temp_max}</span>
-              <span>&#8451;</span>
-            </StyledSpan>
-          </TextBlock>
-          <TextBlock>
-            <span>{'Wind: '}</span>
-            <StyledSpan>
-              {cityData.wind.speed}
-              <span>{' m/h'}</span>
-            </StyledSpan>
-          </TextBlock>
-          <TextBlock>
-            <span>{'Humidity: '}</span>
-            <StyledSpan>
-              {cityData.main.humidity}
-              <span>&#37;</span>
-            </StyledSpan>
-          </TextBlock>
-          <TextBlock>
-            <span>{'Sunrise: '} </span>
-            <FiSunrise />
-            <StyledSpan>{sunriseDate.current}</StyledSpan>
-          </TextBlock>
-          <TextBlock>
-            <span>{'Sunset: '}</span> <FiSunset />
-            <StyledSpan>{sunsetDate.current}</StyledSpan>
-          </TextBlock>
-          {location === 'Selected city info' && (
-            <CloseIcon onClick={handleCloseIcon} />
+          ) : (
+            location === 'Selected city info' && <h3>{clock}</h3>
           )}
-        </>
-      )}
+
+          {when === true ? (
+            <div>
+              <IMG src={cityData?.weather[0].icon} alt="Weather Icon" />
+            </div>
+          ) : (
+            location === 'Selected city info' && (
+              <div>
+                <IMG src={cityData?.weather[0].icon} alt="Weather Icon" />
+              </div>
+            )
+          )}
+        </MainBox>
+
+        <TextBlock>
+          <span>{'Conditions: '}</span>
+          <StyledSpan>{cityData?.weather[0].description}</StyledSpan>
+        </TextBlock>
+        <TextBlock>
+          <span>{'Temperature: '}</span>
+          <StyledSpan>
+            {cityData?.main.temp_max}
+            <span>{' ... '}</span>
+            <span>{cityData?.main.temp_max}</span>
+            <span>&#8451;</span>
+          </StyledSpan>
+        </TextBlock>
+        <TextBlock>
+          <span>{'Wind: '}</span>
+          <StyledSpan>
+            {cityData?.wind.speed}
+            <span>{' m/h'}</span>
+          </StyledSpan>
+        </TextBlock>
+        <TextBlock>
+          <span>{'Humidity: '}</span>
+          <StyledSpan>
+            {cityData?.main.humidity}
+            <span>&#37;</span>
+          </StyledSpan>
+        </TextBlock>
+        <TextBlock>
+          <span>{'Sunrise: '} </span>
+          <FiSunrise />
+          <StyledSpan>
+            {when === true
+              ? sunriseDate.current
+              : location === 'Selected city info' && sunriseDate.current}
+          </StyledSpan>
+        </TextBlock>
+        <TextBlock>
+          <span>{'Sunset: '}</span> <FiSunset />
+          <StyledSpan>
+            {when === true
+              ? sunriseDate.current
+              : location === 'Selected city info' && sunsetDate.current}
+          </StyledSpan>
+        </TextBlock>
+        {location === 'Selected city info' && (
+          <CloseIcon onClick={handleCloseIcon} />
+        )}
+        {location === 'Current Location' && when === false && (
+          <CityBoxLayout>
+            <MdLocationOff size={100} fill={'white'} />
+
+            <Title>Press 'Ok' when your goelocation is 'ON'</Title>
+            <Button variant="contained" onClick={onClick}>
+              <span>Ok</span>
+            </Button>
+          </CityBoxLayout>
+        )}
+      </>
     </CityBox>
   );
 };

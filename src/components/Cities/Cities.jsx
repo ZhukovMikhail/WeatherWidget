@@ -8,14 +8,24 @@ import 'react-toastify/dist/ReactToastify.css';
 import { notifyError } from '../../services/utils';
 
 export const Cities = ({ selectedCity }) => {
-  const geoObj = useGeolocation();
-  const [currentCityData, setCurrentCityData] = useState(null);
+  const [currentCityData, setCurrentCityData] = useState();
   const [selectedCityData, setSelectedCityData] = useState(null);
-  // currentCityData && console.log('currentCityData', currentCityData);
-  // selectedCityData && console.log('selectedCityData', selectedCityData);
+  const [when, setWhen] = useState(true);
+
+  const geoObj = useGeolocation({ when });
+
+  const onClick = () => {
+    setWhen(true);
+  };
 
   useEffect(() => {
-    geoObj &&
+    setWhen(true);
+    if (geoObj?.isError === true) {
+      setWhen(false);
+      return;
+    }
+
+    geoObj?.isError === false &&
       getDefaultCity(geoObj.lng, geoObj.lat)
         .then(r => {
           setCurrentCityData(r);
@@ -24,7 +34,7 @@ export const Cities = ({ selectedCity }) => {
           console.log(e);
           notifyError(e.message);
         });
-  }, [geoObj]);
+  }, [geoObj?.isError, geoObj?.lat, geoObj?.lng, geoObj]);
 
   useEffect(() => {
     if (selectedCity === undefined) {
@@ -38,17 +48,18 @@ export const Cities = ({ selectedCity }) => {
       })
       .catch(e => console.log(e));
   }, [selectedCity]);
+  // console.log('geoObj', geoObj);
 
   return (
     <>
       <ToastContainer />
       <Container>
-        {currentCityData && (
-          <CityBoxTamplate
-            cityData={currentCityData}
-            location={'Current Location'}
-          />
-        )}
+        <CityBoxTamplate
+          cityData={currentCityData}
+          location={'Current Location'}
+          onClick={onClick}
+          when={when}
+        />
 
         {selectedCityData && (
           <CityBoxTamplate
