@@ -22,21 +22,22 @@ export const CityBoxTamplate = ({
 }) => {
   const [clock, setClock] = useState();
 
-  const sunriseDate = useRef(
+  const sunriseDate =
+    cityData &&
+    cityData.timezone &&
     new Date(
-      cityData?.sys.sunrise * 1000 -
-        cityData?.timezone * 1000 -
+      cityData.sys.sunrise * 1000 -
+        cityData.timezone * 1000 -
         new Date().getTimezoneOffset() * 60000
-    ).toLocaleTimeString()
-  );
-
-  const sunsetDate = useRef(
+    ).toLocaleTimeString();
+  const sunsetDate =
+    cityData &&
+    cityData.timezone &&
     new Date(
-      cityData?.sys.sunset * 1000 -
-        cityData?.timezone * 1000 -
+      cityData.sys.sunset * 1000 -
+        cityData.timezone * 1000 -
         new Date().getTimezoneOffset() * 60000
-    ).toLocaleTimeString()
-  );
+    ).toLocaleTimeString();
 
   const timer = useRef(
     setInterval(() => {
@@ -64,7 +65,6 @@ export const CityBoxTamplate = ({
     <CityBox>
       <>
         <p>{location}</p>
-
         <MainBox>
           <h2>{cityData?.name}</h2>
           <h3>{cityData?.sys.country}</h3>
@@ -87,7 +87,6 @@ export const CityBoxTamplate = ({
             )
           )}
         </MainBox>
-
         <TextBlock>
           <span>{'Conditions: '}</span>
           <StyledSpan>{cityData?.weather[0].description}</StyledSpan>
@@ -115,23 +114,27 @@ export const CityBoxTamplate = ({
             <span>&#37;</span>
           </StyledSpan>
         </TextBlock>
+
         <TextBlock>
           <span>{'Sunrise: '} </span>
           <FiSunrise />
           <StyledSpan>
             {when === true
-              ? sunriseDate.current
-              : location === 'Selected city info' && sunriseDate.current}
+              ? // ? sunriseDate.current
+                sunriseDate
+              : location === 'Selected city info' && sunriseDate}
           </StyledSpan>
         </TextBlock>
         <TextBlock>
           <span>{'Sunset: '}</span> <FiSunset />
           <StyledSpan>
             {when === true
-              ? sunriseDate.current
-              : location === 'Selected city info' && sunsetDate.current}
+              ? // ? sunriseDate.current
+                sunsetDate
+              : location === 'Selected city info' && sunsetDate}
           </StyledSpan>
         </TextBlock>
+
         {location === 'Selected city info' && (
           <CloseIcon onClick={handleCloseIcon} />
         )}
