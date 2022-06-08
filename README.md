@@ -7,7 +7,6 @@ Weather-widget
 Description:
 The weather widget allows you to get weather data from the current location of the user, as well as add any major city on the planet from your list and monitor weather conditions at the same time for all added cities from the list. You can also find more detailed information about the weather in the city from the list. To do this, click on it and detailed information will appear at the top right of the screen. To remove a city from the list, click the Delete button. For easy viewing of the list of cities, the list is divided into pages of five positions each.
 
-Before use on mibile phone you need to switch on your device navigation.
 Application link https://zhukovmikhail.github.io/weather-widget/
 Enjoy!
 
